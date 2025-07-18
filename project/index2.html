@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>انتخاب رنگ پس‌زمینه</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    select, button {
+      padding: 10px;
+      font-size: 1rem;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>رنگ پس‌زمینه‌ات رو انتخاب کن:</h2>
+  <select id="colorSelect">
+    <option value="#ffffff">سفید</option>
+    <option value="#f0f8ff">آبی روشن</option>
+    <option value="#ffe4e1">صورتی ملایم</option>
+    <option value="#90ee90">سبز ملایم</option>
+    <option value="#f5f5dc">بژ</option>
+  </select>
+  <button id="applyBtn">اعمال رنگ</button>
+
+  <script>
+    const select = document.getElementById("colorSelect");
+    const applyBtn = document.getElementById("applyBtn");
+
+
+    const savedColor = localStorage.getItem("bgColor");
+    if (savedColor) {
+      document.body.style.backgroundColor = savedColor;
+      select.value = savedColor;
+    }
+
+    applyBtn.addEventListener("click", () => {
+      const selectedColor = select.value;
+      document.body.style.backgroundColor = selectedColor;
+      localStorage.setItem("bgColor", selectedColor);
+    });
+  </script>
+</body>
+</html>

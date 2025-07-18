@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>افکت کلیک و رنگ تصادفی</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+        background-color: #333;
+      transition: background-color 0.3s;
+    }
+
+
+    h1 {
+      color: #fff;
+      position: absolute;
+      top: 10%;
+    }
+
+    .ripple {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      transform: scale(0);
+      animation: ripple 0.6s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(8);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>روی صفحه کلیک کن!</h1>
+
+  <script>
+    function randomColor() {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    document.addEventListener("click", function(e) {
+
+      document.body.style.backgroundColor = randomColor();
+
+  
+      const ripple = document.createElement("div");
+      ripple.className = "ripple";
+      ripple.style.left = `${e.clientX}px`;
+      ripple.style.top = `${e.clientY}px`;
+      document.body.appendChild(ripple);
+
+  
+      ripple.addEventListener("animationend", () => {
+        ripple.remove();
+      });
+    });
+  </script>
+</body>
+</html>
